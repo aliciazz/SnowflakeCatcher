@@ -1,42 +1,75 @@
+Snowflake [] bob;
 void setup()
 {
-  //your code here
+  bob = new Snowflake[200];
+  for (int i = 0; i< bob.length; i++)
+    {
+      bob[i] = new Snowflake();
+    }
+  size(300, 300);
+  background(0);
 }
 void draw()
 {
-  //your code here
+  for (int i = 0; i < bob.length; i++)
+  {
+    bob[i].lookDown();
+    bob[i].erase();
+    bob[i].move();
+    bob[i].wrap();
+    bob[i].show();
+  }
 }
 void mouseDragged()
 {
-  //your code here
+  ellipse(mouseX, mouseY, 10, 10);
 }
 
 class Snowflake
 {
-  //class member variable declarations
+  int x, y, r;
+  boolean b = true;
   Snowflake()
   {
-    //class member variable initializations
+    x = (int)(Math.random()*300);
+    y = (int)(Math.random()*300);
+    b = true;
+    r = (int)(Math.random()*10-6);
   }
   void show()
   {
-    //your code here
+    fill(255);
+    noStroke();
+    ellipse(x, y, 5, 5);
   }
   void lookDown()
   {
-    //your code here
+    if (get(x, y+4) != color(0))
+      b = false;
+    else if (get(x, y+4) == color(255, 255, 255))
+      b = true;
+    else  
+      b = true;
+
   }
   void erase()
   {
-    //your code here
+    fill(0);
+    ellipse (x, y, 8, 8); 
   }
   void move()
   {
-    //your code here
+    if ( b == true){
+      y ++;
+    }
   }
   void wrap()
   {
-    //your code here
+    if ( y > 300)
+    {
+      y = 0;
+      x = (int)(Math.random()*300);
+    }
   }
 }
 
